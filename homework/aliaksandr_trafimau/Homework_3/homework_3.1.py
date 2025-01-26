@@ -1,10 +1,10 @@
 a = int(input("Enter the number x: "))
 b = int(input("Enter the number y: "))
 
-Sum = a + b
+sum_result = a + b
 difference = a - b
-multiply = a * b
+product = a * b
 
-print ("Sum", Sum)
-print ("Diffrence", difference)
-print("Multiply", multiply)
+print("Sum", sum_result)
+print("Difference", difference)
+print("Multiply", product)
