@@ -17,7 +17,7 @@ my_dict['list'].append("new_element")
 del my_dict['list'][1]
 print(my_dict['list'])
 
-my_dict['dict'][('i am a tuple',)] = "0.0004"
+my_dict['dict'][('i am a tuple',)] = "ABC"
 del my_dict['dict']['B']
 print(my_dict['dict'])
 
