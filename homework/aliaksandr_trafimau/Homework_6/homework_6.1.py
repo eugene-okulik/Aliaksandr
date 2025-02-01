@@ -8,4 +8,3 @@ for num in numbers:
         print('Buzz')
     else:
         print(num)
-        
