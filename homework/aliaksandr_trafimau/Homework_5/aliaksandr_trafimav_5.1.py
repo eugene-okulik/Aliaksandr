@@ -24,7 +24,7 @@ print('result2 :', c1 + c2 + c3)
 d1 = int(a[a.index(':') + 2:]) + 10
 d2 = int(b[b.index(':') + 2:]) + 10
 d3 = int(c[c.index(':') + 2:]) + 10
-print('result3 :', d1+d2+d3)
+print('result3 :', d1 + d2 + d3)
 
 # Task 3
 students = ['Ivanov', 'Petrov', 'Sidorov']
