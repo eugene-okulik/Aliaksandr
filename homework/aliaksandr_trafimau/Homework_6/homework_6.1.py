@@ -6,6 +6,5 @@ for at in number:
         print('Fuzz')
     elif at % 5 == 0:
         print('Buzz')
-
     else:
         print(at)
