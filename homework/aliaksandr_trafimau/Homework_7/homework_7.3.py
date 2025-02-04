@@ -3,9 +3,9 @@ def extract(text_list):
     for text in text_list:
         number = int(text.split(":")[-1].strip())
         result = number + 10
-
         total_sum += result
     print("Sum:", total_sum)
+
 
 extract([
     "результат операции: 42",
@@ -13,4 +13,3 @@ extract([
     "результат работы программы: 209",
     "результат: 2"
 ])
-
