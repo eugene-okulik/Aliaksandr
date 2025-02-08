@@ -6,6 +6,7 @@ def fib_inf():
 
 gen_fib_inf = fib_inf()
 
+
 numbers = {5, 200, 1000, 10000}
 results = {}
 current_position = 1
