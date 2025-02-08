@@ -3,7 +3,8 @@ def fib_inf():
     while True:
         yield a
         a, b = b, a + b
-gen_fib_inf =fib_inf()
+
+gen_fib_inf = fib_inf()
 
 numbers = {5, 200, 1000, 10000}
 results = {}
@@ -16,5 +17,5 @@ for fib_number in gen_fib_inf:
             break
     current_position += 1
 
-for position in sorted(results):
-    print(f"{position} - {results[position]}")
+for position, value in sorted(results.items()):
+    print(f"{position} - {value}")
