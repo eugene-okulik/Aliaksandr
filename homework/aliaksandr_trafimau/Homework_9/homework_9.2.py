@@ -5,8 +5,10 @@ temperatures = [
     29, 31, 33, 31, 30, 32, 30, 28, 24, 23
 ]
 
+
 def is_hot_temperature(x):
     return x > 28
+
 
 hot_temperatures = list(filter(is_hot_temperature, temperatures))
 
