@@ -5,8 +5,10 @@ def repeat_me(func):
             func(*args, **kwargs)
     return wrapper
 
+
 @repeat_me
 def example(text):
     print(text)
+
 
 example('print me', count=2)

@@ -14,6 +14,7 @@ def operation_decorator(func):
         return func(first, second, operation)
     return wrapper
 
+
 @operation_decorator
 def calc(first, second, operation):
     if operation == '+':
@@ -28,7 +29,7 @@ def calc(first, second, operation):
     elif operation == '*':
         return first * second
 
-# User input and result calculation.
+
 first_input = float(input("Enter the first number: "))
 second_input = float(input("Enter the second number: "))
 
