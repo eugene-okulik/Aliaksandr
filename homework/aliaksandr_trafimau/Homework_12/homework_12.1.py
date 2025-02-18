@@ -74,9 +74,9 @@ class Bouquet:
 
     def find_flowers(self, min_lifespan=None, max_lifespan=None, color=None):
         results = [flower for flower in self.flowers
-                   if (min_lifespan is None or flower.lifespan >= min_lifespan) and
-                      (max_lifespan is None or flower.lifespan <= max_lifespan) and
-                      (color is None or flower.color == color)]
+                   if (min_lifespan is None or flower.lifespan >= min_lifespan)
+                   and   (max_lifespan is None or flower.lifespan <= max_lifespan)
+                   and   (color is None or flower.color == color)]
         return results
 
     def __repr__(self):
