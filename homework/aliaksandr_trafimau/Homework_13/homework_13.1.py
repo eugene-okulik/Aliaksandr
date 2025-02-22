@@ -1,13 +1,14 @@
 import datetime
 
-
-file_path = r'C:\Users\Aliaksandr_Trafimau4\Desktop\Syngenta\AT GIT Project\Aliaksandr\homework\eugene_okulik\hw_13\data.txt'
+file_path = (
+    r'C:\Users\Aliaksandr_Trafimau4\Desktop\Syngenta\AT GIT Project'
+    r'\Aliaksandr\homework\eugene_okulik\hw_13\data.txt'
+)
 
 
 def process_dates():
     with open(file_path, 'r', encoding='utf-8') as file:
         lines = file.readlines()
-
 
     for line in lines:
         parts = line.split(' - ')
