@@ -1,0 +1,73 @@
+insert into students (name, second_name, group_id)
+values ('Aliaksandr', 'Trafimau', 28355)
+
+insert into books (title, taken_by_student_id)
+values 
+('Echoes of Time',4468),
+('Beyond the Horizon', 4468),
+('The Last Symphony', 4468)
+
+
+insert into `groups` (title, start_date, end_date)
+values ('AT_Group', 'Jan 2025', 'jul 2025')
+
+update students set group_id = 2837 where name = 'Aliaksandr' AND second_name ='Trafimau'
+
+insert into subjets (title)
+values
+('AT_Sub_1'),
+('AT_Sub_2'),
+('AT_Sub_3')
+# Wrong values
+insert into lessons (title, subject_id)
+values
+('lesson_1', 4538),
+('lesson_2', 4538),
+('lesson_1', 4539),
+('lesson_2', 4539),
+('lesson_1', 4540),
+('lesson_2', 4540)
+# Proper values
+UPDATE lessons SET title = 'lesson_1' WHERE subject_id = 4538 AND title = 'lesson_1';
+UPDATE lessons SET title = 'lesson_2' WHERE subject_id = 4538 AND title = 'lesson_2';
+UPDATE lessons SET title = 'lesson_3' WHERE subject_id = 4539 AND title = 'lesson_1';
+UPDATE lessons SET title = 'lesson_4' WHERE subject_id = 4539 AND title = 'lesson_2';
+UPDATE lessons SET title = 'lesson_5' WHERE subject_id = 4540 AND title = 'lesson_1';
+UPDATE lessons SET title = 'lesson_6' WHERE subject_id = 4540 AND title = 'lesson_2';
+
+SELECT lessons.id , title, lessons.subject_id  FROM lessons
+WHERE title IN ('lesson_1', 'lesson_2', 'lesson_3', 'lesson_4', 'lesson_5', 'lesson_6') and lessons.subject_id IN (4538,4539,4540)
+
+insert into marks (value, lesson_id, student_id)
+values
+(5, 8340, 4468),
+(6, 8341, 4468),
+(7, 8342, 4468),
+(3, 8343, 4468),
+(4, 8344, 4468),
+(10, 8345, 4468)
+
+select s.name , s.second_name , m.value as mark
+from students s 
+join marks m on m.student_id = s.id 
+where s.name = 'Aliaksandr' AND s.second_name ='Trafimau'
+
+select s.name, s.second_name, b.title as book_name
+from students s 
+join books b on b.taken_by_student_id = s.id 
+where s.name = 'Aliaksandr' AND s.second_name ='Trafimau'
+order by b.title 
+
+select DISTINCT  s.name, s.second_name, g.title as group_name, s2.title as subject_name, l.title as lesson_name, m.value as mark
+from students s 
+left join books b on s.id = b.taken_by_student_id 
+left join `groups` g on g.id = s.group_id 
+left join marks m on m.student_id = s.id 
+left join lessons l on l.id = m.lesson_id 
+left join subjets s2 on s2.id = l.subject_id 
+where s.name = 'Aliaksandr' AND s.second_name ='Trafimau'
+order by l.title 
+
+
+
+
