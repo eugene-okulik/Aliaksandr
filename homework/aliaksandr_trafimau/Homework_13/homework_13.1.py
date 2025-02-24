@@ -9,6 +9,7 @@ source_dir = os.path.abspath(os.path.join(current_dir, '..', '..', 'eugene_okuli
 source_file = os.path.join(source_dir, 'data.txt')
 print(source_dir)
 
+
 def process_dates():
     with open(source_file, 'r', encoding='utf-8') as file:
         lines = file.readlines()
