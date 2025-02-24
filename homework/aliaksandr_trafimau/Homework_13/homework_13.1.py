@@ -1,13 +1,15 @@
 import datetime
+import os
 
-file_path = (
-    r'C:\Users\Aliaksandr_Trafimau4\Desktop\Syngenta\AT GIT Project'
-    r'\Aliaksandr\homework\eugene_okulik\hw_13\data.txt'
-)
+current_dir = os.path.dirname(__file__)
+print(current_dir)
 
+source_dir = os.path.abspath(os.path.join(current_dir, '..', '..', 'eugene_okulik', 'hw_13'))
+source_file = os.path.join(source_dir, 'data.txt')
+print(source_dir)
 
 def process_dates():
-    with open(file_path, 'r', encoding='utf-8') as file:
+    with open(source_file, 'r', encoding='utf-8') as file:
         lines = file.readlines()
 
     for line in lines:
