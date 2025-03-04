@@ -28,9 +28,9 @@ db = mysql.connect(
 
 cursor = db.cursor()
 cursor.execute("""
-select DISTINCT students.name, students.second_name, groups.title, books.title, subjets.title, lessons.title, 
-marks.value  
-from students 
+select DISTINCT students.name, students.second_name, groups.title, books.title, subjets.title, lessons.title,
+marks.value
+from students
 left join books  on students.id  = books.taken_by_student_id
 left join `groups`  on groups.id = students.group_id
 left join marks  on marks.student_id = students.id
