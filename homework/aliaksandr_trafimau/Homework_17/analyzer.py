@@ -59,9 +59,15 @@ def print_context(line_number, line, search_text):
     if json_part:
         context = process_json(json_part, search_text)
         if context:
-            print(f"Found at line {line_number}: {prefix} ... {context}")
+            print(f"Found in JSON at line {line_number}: {prefix} ... {context}")
     else:
-        pass
+        if search_text in line:
+            words = line.split()
+            index = words.index(search_text)
+            start = max(0, index - 5)
+            end = min(len(words), index + 6)
+            context = ' '.join(words[start:end])
+            print(f"Found in line {line_number}: ... {context} ...")
 
 
 def main():
@@ -87,5 +93,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-# python analyzer.py "C:\Users\Aliaksandr_Trafimau4\Desktop\Syngenta\AT GIT Project\Aliaksandr\homework\
-# eugene_okulik\data\logs" --text 69.927119679
