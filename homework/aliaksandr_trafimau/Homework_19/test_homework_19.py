@@ -2,6 +2,13 @@ import requests
 import pytest
 
 
+@pytest.fixture(autouse=True)
+def printing_messages():
+    print("before test")
+    yield
+    print("after test")
+
+
 @pytest.fixture()
 def post():
     post_body = {
@@ -37,10 +44,11 @@ def header():
 
 
 @pytest.mark.medium
-def test_get(post,header):
+def test_get(post, header):
     response_get = requests.get(f'http://167.172.172.115:52353/object/{post}')
     assert response_get.json(), "Response JSON is empty or null."
     print(response_get.json())
+
 
 @pytest.mark.critical
 def test_put(post):
@@ -64,6 +72,7 @@ def test_put(post):
     assert response_put['name'] == "AT_object"
     print(response_put)
 
+
 @pytest.mark.medium
 def test_patch(post):
     patch_body = {
@@ -84,35 +93,3 @@ def test_patch(post):
     assert "id" in response_patch, "Response does not contain 'id'"
     assert "data" in response_patch, "Response does not contain 'data'"
     print(response_patch)
-
-
-def test_post():  # test w/o fixture
-    post_body = {
-        "data": {
-            "aat1": "66669844",
-            "at1": "45668944",
-            "color1": "white6894",
-            "size1": "big268944"
-        },
-        "id": "420",
-        "name": "First3 object233689"
-    }
-    post_headers = {'Content-Type': 'application/json'}
-
-    response_post = requests.post(
-        'http://167.172.172.115:52353/object',
-        json=post_body,
-        headers=post_headers
-    )
-    assert response_post.status_code == 200, 'Status code is incorrect'
-    print(response_post.json())
-    return response_post.json()['id']
-
-
-object_id = test_post()
-
-
-def delete(object_id):
-    print('deleting the object')
-    response_delete = requests.delete(f'http://167.172.172.115:52353/object/{object_id}')
-    print(response_delete.text)
