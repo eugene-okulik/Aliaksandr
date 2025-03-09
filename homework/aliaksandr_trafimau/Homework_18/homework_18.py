@@ -1,7 +1,6 @@
 import requests
 
 
-
 def get():
     response_get = requests.get('http://167.172.172.115:52353/object')
     assert response_get.json(), "Response JSON is empty or null."
@@ -9,8 +8,6 @@ def get():
 
 
 get()
-
-import requests
 
 
 def post():
