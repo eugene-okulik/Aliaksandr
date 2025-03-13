@@ -150,5 +150,5 @@ def test_patch_object(created_object):
     ).json()
 
     assert "id" in response_patch, "Response does not contain 'id'"
-    assert "data" in response_patch, "Response does not contain 'data'"
+    assert "data" in response_patch, "Response does not contain 'datas'"
     print("PATCH response:", response_patch)
