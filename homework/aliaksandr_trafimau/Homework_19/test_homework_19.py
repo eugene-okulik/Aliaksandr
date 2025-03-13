@@ -35,12 +35,20 @@ def created_object():
 
     yield post_id
 
-    print('Deleting the object.')
-    delete_response = requests.delete(f'http://167.172.172.115:52353/object/{post_id}')
-    if delete_response.status_code == 200:
-        print("Object deleted successfully.")
+    print('Checking if the object still exists for deletion.')
+    get_response = requests.get(f'http://167.172.172.115:52353/object/{post_id}')
+
+    if get_response.status_code == 200:
+        print('Deleting the object.')
+        delete_response = requests.delete(f'http://167.172.172.115:52353/object/{post_id}')
+
+        if delete_response.status_code == 200:
+            print("Object deleted successfully.")
+        else:
+            print("Failed to delete object.")
+
     else:
-        print("Failed to delete object.")
+        print("Object does not exist, skipping deletion.")
 
 
 @pytest.fixture(scope='session')
@@ -51,7 +59,7 @@ def test_session():
 
 
 @pytest.mark.critical
-def test_add_object():
+def test_add_object(test_session):
     post_body = {
         "data": {
             "aat1": "1111",
@@ -81,39 +89,18 @@ def test_add_object():
 
 
 @pytest.mark.critical
-def test_delete_object():
-    post_body = {
-        "data": {
-            "aat1": "delete_test_1",
-            "aatt1": "delete_test_2",
-            "color1": "red",
-            "size1": "medium"
-        },
-        "id": "987",
-        "name": "Object to Delete"
-    }
-    post_headers = {'Content-Type': 'application/json'}
-
-    response_post = requests.post(
-        'http://167.172.172.115:52353/object',
-        json=post_body,
-        headers=post_headers
-    )
-    assert response_post.status_code == 200, 'Failed to create object for delete test'
-    obj_id = response_post.json()["id"]
-    print("Created object for delete test:", response_post.json())
-
-    delete_response = requests.delete(f'http://167.172.172.115:52353/object/{obj_id}')
+def test_delete_object(created_object):
+    delete_response = requests.delete(f'http://167.172.172.115:52353/object/{created_object}')
     assert delete_response.status_code == 200, 'Failed to delete object'
     print("Object deleted successfully.")
 
-    response_get = requests.get(f'http://167.172.172.115:52353/object/{obj_id}')
+    response_get = requests.get(f'http://167.172.172.115:52353/object/{created_object}')
     assert response_get.status_code == 404, 'Object still exists after deletion'
     print("Verified that object was deleted.")
 
 
 @pytest.mark.medium
-def test_get_object(created_object, test_session):
+def test_get_object(created_object):
     response_get = requests.get(f'http://167.172.172.115:52353/object/{created_object}')
     assert response_get.status_code == 200, "Failed to GET object."
     assert response_get.json(), "Response JSON is empty or null."
