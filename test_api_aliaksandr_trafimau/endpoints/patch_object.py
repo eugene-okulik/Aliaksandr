@@ -29,3 +29,4 @@ class PatchObject(Endpoint):
     def check_response_integrity(self):
         response_patch = self.response.json()
         assert "data" in response_patch, "Response does not contain 'datas'"
+        
