@@ -24,6 +24,7 @@ def update_object_endpoint():
 def patch_object_endpoint():
     return PatchObject()
 
+
 @pytest.fixture
 def create_object(create_object_endpoint, delete_object_endpoint):
     def _create(data):
@@ -32,4 +33,5 @@ def create_object(create_object_endpoint, delete_object_endpoint):
         yield object_id
         delete_object_endpoint.delete_object(object_id=object_id)
         delete_object_endpoint.check_status_code_is_correct()
+
     return _create
