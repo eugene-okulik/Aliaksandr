@@ -26,22 +26,16 @@ TEST_DATA = [
 
 @pytest.mark.medium
 @pytest.mark.parametrize('data', TEST_DATA)
-def test_add_object(create_post_endpoint, delete_post_endpoint, data):
-    create_post_endpoint.new_post(payload=data)
-    create_post_endpoint.check_status_code_is_correct()
-    create_post_endpoint.check_response_contains_keys('id', 'data', 'name')
-    object_id = create_post_endpoint.response.json().get('id')
-    delete_post_endpoint.delete_post(object_id=object_id)
-    delete_post_endpoint.check_status_code_is_correct()
+def test_add_object(create_object_endpoint, create_object, data):
+    next(create_object(data))
+    create_object_endpoint.check_status_code_is_correct()
+    create_object_endpoint.check_response_contains_keys('id', 'data', 'name')
 
 
 @pytest.mark.critical
 @pytest.mark.parametrize('data', [TEST_DATA[0]])
-def test_update_object(create_post_endpoint, update_post_endpoint, delete_post_endpoint, data):
-    create_post_endpoint.new_post(payload=data)
-
-    object_id = create_post_endpoint.response.json().get('id')
-
+def test_update_object(update_object_endpoint, create_object, data):
+    object_id = next(create_object(data))
     payload_for_update = {
         "data": {
             "aat3": "0",
@@ -52,20 +46,14 @@ def test_update_object(create_post_endpoint, update_post_endpoint, delete_post_e
         "id": "10000",
         "name": "New Object 7777"
     }
-
-    update_post_endpoint.update_object(object_id=object_id, payload=payload_for_update)
-    update_post_endpoint.check_status_code_is_correct()
-    delete_post_endpoint.delete_post(object_id=object_id)
-    delete_post_endpoint.check_status_code_is_correct()
+    update_object_endpoint.update_object(object_id=object_id, payload=payload_for_update)
+    update_object_endpoint.check_status_code_is_correct()
 
 
 @pytest.mark.critical
 @pytest.mark.parametrize('data', [TEST_DATA[0]])
-def test_patch_object(create_post_endpoint, delete_post_endpoint, data, patch_post_endpoint):
-    create_post_endpoint.new_post(payload=data)
-
-    object_id = create_post_endpoint.response.json().get('id')
-    assert object_id, "Object ID is missing after POST request!"
+def test_patch_object(patch_object_endpoint, create_object, data):
+    object_id = next(create_object(data))
     payload_for_patch = {
         "data": {
             "aat3": "0",
@@ -73,22 +61,17 @@ def test_patch_object(create_post_endpoint, delete_post_endpoint, data, patch_po
             "color7": "blackkkk",
             "size5": "bigggg"
         },
-
     }
-
-    patch_post_endpoint.patch_object(object_id=object_id, payload=payload_for_patch)
-    patch_post_endpoint.check_status_code_is_correct()
-    patch_post_endpoint.check_id_in_response()
-    patch_post_endpoint.check_data_in_response()
-    patch_post_endpoint.check_response_integrity()
-    delete_post_endpoint.delete_post(object_id=object_id)
-    delete_post_endpoint.check_status_code_is_correct()
+    patch_object_endpoint.patch_object(object_id=object_id, payload=payload_for_patch)
+    patch_object_endpoint.check_status_code_is_correct()
+    patch_object_endpoint.check_id_in_response()
+    patch_object_endpoint.check_data_in_response()
+    patch_object_endpoint.check_response_integrity()
 
 
 @pytest.mark.critical
 @pytest.mark.parametrize('data', [TEST_DATA[0]])
-def test_delete_object(create_post_endpoint, delete_post_endpoint, data):
-    create_post_endpoint.new_post(payload=data)
-    object_id = create_post_endpoint.response.json().get('id')
-    delete_post_endpoint.delete_post(object_id=object_id)
-    delete_post_endpoint.check_status_code_is_correct()
+def test_delete_object(delete_object_endpoint, create_object, data):
+    object_id = next(create_object(data))
+    delete_object_endpoint.delete_object(object_id=object_id)
+    delete_object_endpoint.check_status_code_is_correct()
