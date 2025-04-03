@@ -13,6 +13,7 @@ def driver():
     yield chrom_driver
     chrom_driver.quit()
 
+
 def test_text_input(driver):
     driver.get('https://www.qa-practice.com/elements/input/simple')
     input_text = '123ADdf'
