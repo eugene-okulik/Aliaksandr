@@ -6,3 +6,9 @@ venv
 __pycache__
 credentials.py
 .env
+allure-report
+allure-results
+test_run_1
+test_run_2
+conftest.py
+pytest.ini
