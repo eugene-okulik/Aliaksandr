@@ -2,6 +2,7 @@ from .base_page import BasePage
 from .locators import sale_page_locator as sale_loc
 from playwright.sync_api import expect
 
+
 class SalePage(BasePage):
     page_url = '/sale.html'
 
