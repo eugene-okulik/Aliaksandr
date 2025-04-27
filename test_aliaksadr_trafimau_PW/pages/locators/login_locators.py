@@ -1,0 +1,8 @@
+FIRST_NAME_INPUT = "id=firstname"
+LAST_NAME_INPUT = "id=lastname"
+EMAIL_INPUT = "id=email_address"
+PASSWORD_INPUT = "id=password"
+CONFIRM_PASSWORD_INPUT = "id=password-confirmation"
+CREATE_ACCOUNT_BUTTON = "xpath=//button[span[text()='Create an Account']]"
+CONFIRM_PASSWORD_ERROR = "id=password-confirmation-error"
+VALIDATION_MESSAGE = "div[data-bind='html: $parent.prepareMessageForHtml(message.text)']"
