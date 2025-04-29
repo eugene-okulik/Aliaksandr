@@ -1,0 +1,42 @@
+TASK 2
+
+# Go to the first line in file.
+g
+
+# Go to the last line in file.
+G
+
+# Move forward one window (page).
+Ctrl + F
+
+# Move forward one line.
+Enter
+
+# Move backward one line.
+Ctrl + Y
+
+# Search forward for a matching line.
+/text
+
+# Search backward for a matching line.
+?text
+
+# Repeat the previous search in the same direction.
+n
+
+# Repeat the previous search in the reverse direction.
+N
+
+
+TASK 3
+
+
+/dev/null: character special file
+/dev/zero: character special file
+/dev/sda: block special file
+/dev/tty: character special file
+/root: directory
+/etc/passwd: regular file
+/proc/mounts: regular file
+/bin/ls: regular file
+/bin/zcat: regular file
